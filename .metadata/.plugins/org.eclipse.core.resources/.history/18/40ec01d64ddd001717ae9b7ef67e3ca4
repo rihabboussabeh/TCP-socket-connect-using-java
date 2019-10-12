@@ -1,0 +1,32 @@
+import java.io.*;
+import java.net.*;
+import java.util.*;
+
+//déclaration de la classe principale avec gestion des threads
+public class Serveur extends Thread {
+
+	public static void main(String[] args) {
+		try{
+			//création de la socket
+			ServerSocket ss =new ServerSocket(1234);
+			while(true){ // vérification de la bonne création de la socket
+				
+			Socket clientSocket=ss.accept(); // accepter la connexion du client
+			
+			System.out.println("Ouverture de la connexion sur la socket de service " );
+			//affichage du message d'information de la création de la socket
+			
+		    Connection  c = new Connection(clientSocket); // création de la connexion
+		    
+		    Thread client = new Thread((Runnable) c); //création du thread avec la fonction de mise en route
+		    client.start(); // démarrage du thread
+
+			}
+		
+			
+		}catch (IOException e){ //gestion des exceptions
+			e.printStackTrace();
+		}
+
+	}
+}
